@@ -1,3 +1,6 @@
+**Clean baseline: 40.53% test accuracy** after 10 epochs on an NVIDIA GeForce RTX 4060 Laptop GPU (seed `42`).
+
+
 Training on: cuda
 Epoch [1/10]  Train Loss:  4.1699 | Train Acc: 5.01% | Test Acc:  6.35%
 Test images counted: 10000
