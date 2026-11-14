@@ -1,6 +1,6 @@
 **Best clean baseline: 40.53% test accuracy** after 10 epochs on an NVIDIA GeForce RTX 4060 Laptop GPU (seed `42`).
 
-## RTX 4060 results · Seed 42
+## Resnet18 on CIFAR100 -  results · Seed 42
 
 | Epoch | Train loss | Train accuracy | Test accuracy |
 | ---: | ---: | ---: | ---: |
@@ -19,5 +19,6 @@ Each epoch was evaluated on all 10,000 CIFAR-100 test images.
 
 [Per-epoch results for all three runs (CSV)](results/resnet18_cifar100_runs.csv) 2.0658 | Train Acc: 43.84% | Test Acc:  40.53%
 Test images counted: 10000
+Runtime approx 8 minutes on RTX 4060 gompared to 55 minutes on i9 CPU
 
 
