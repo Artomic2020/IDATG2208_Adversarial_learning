@@ -1,0 +1,31 @@
+run_id,device,seed,epoch,train_loss,train_accuracy_pct,test_accuracy_pct
+cpu_baseline,Intel Core i9,,1,4.1857,5.00,6.47
+cpu_baseline,Intel Core i9,,2,3.8219,9.46,11.60
+cpu_baseline,Intel Core i9,,3,3.5102,15.29,16.75
+cpu_baseline,Intel Core i9,,4,3.2617,19.57,19.11
+cpu_baseline,Intel Core i9,,5,2.9720,25.02,22.47
+cpu_baseline,Intel Core i9,,6,2.7168,30.19,22.42
+cpu_baseline,Intel Core i9,,7,2.4796,34.61,27.92
+cpu_baseline,Intel Core i9,,8,2.3023,38.74,34.61
+cpu_baseline,Intel Core i9,,9,2.1610,41.70,37.51
+cpu_baseline,Intel Core i9,,10,2.0469,44.57,39.23
+rtx_first_run,GeForce RTX 4060 Laptop GPU,,1,4.1355,5.28,6.01
+rtx_first_run,GeForce RTX 4060 Laptop GPU,,2,3.7695,10.56,9.76
+rtx_first_run,GeForce RTX 4060 Laptop GPU,,3,3.4739,15.86,13.90
+rtx_first_run,GeForce RTX 4060 Laptop GPU,,4,3.1891,20.91,19.01
+rtx_first_run,GeForce RTX 4060 Laptop GPU,,5,2.8917,26.49,26.45
+rtx_first_run,GeForce RTX 4060 Laptop GPU,,6,2.6182,31.71,29.48
+rtx_first_run,GeForce RTX 4060 Laptop GPU,,7,2.4158,36.10,33.47
+rtx_first_run,GeForce RTX 4060 Laptop GPU,,8,2.2446,39.88,37.27
+rtx_first_run,GeForce RTX 4060 Laptop GPU,,9,2.1175,42.62,33.86
+rtx_first_run,GeForce RTX 4060 Laptop GPU,,10,1.9990,45.47,29.50
+rtx_seed_42,GeForce RTX 4060 Laptop GPU,42,1,4.1699,5.01,6.35
+rtx_seed_42,GeForce RTX 4060 Laptop GPU,42,2,3.8348,9.36,10.39
+rtx_seed_42,GeForce RTX 4060 Laptop GPU,42,3,3.5492,14.39,14.97
+rtx_seed_42,GeForce RTX 4060 Laptop GPU,42,4,3.2550,19.77,22.33
+rtx_seed_42,GeForce RTX 4060 Laptop GPU,42,5,2.9587,25.19,19.38
+rtx_seed_42,GeForce RTX 4060 Laptop GPU,42,6,2.6932,30.26,23.45
+rtx_seed_42,GeForce RTX 4060 Laptop GPU,42,7,2.4737,35.01,30.01
+rtx_seed_42,GeForce RTX 4060 Laptop GPU,42,8,2.3086,38.33,37.39
+rtx_seed_42,GeForce RTX 4060 Laptop GPU,42,9,2.1816,41.27,37.28
+rtx_seed_42,GeForce RTX 4060 Laptop GPU,42,10,2.0658,43.84,40.53

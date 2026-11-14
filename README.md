@@ -28,3 +28,8 @@ Test images counted: 10000
 Training on: cuda
 Epoch [10/10]  Train Loss:  2.0658 | Train Acc: 43.84% | Test Acc:  40.53%
 Test images counted: 10000
+
+
+
+
+[Per-epoch results for all three runs (CSV)](results/resnet18_cifar100_runs.csv)
