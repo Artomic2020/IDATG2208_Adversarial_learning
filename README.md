@@ -1,6 +1,7 @@
 **Best clean baseline: 40.53% test accuracy** after 10 epochs on an NVIDIA GeForce RTX 4060 Laptop GPU (seed `42`).
 
-## Resnet18 on CIFAR100 -  results · Seed 42
+## Checkpoint 1 · Dataset 1 (CIFAR-100) · Standard ResNet-18
+
 
 | Epoch | Train loss | Train accuracy | Test accuracy |
 | ---: | ---: | ---: | ---: |
