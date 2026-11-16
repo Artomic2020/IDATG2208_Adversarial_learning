@@ -20,6 +20,6 @@ Each epoch was evaluated on all 10,000 CIFAR-100 test images.
 
 [Per-epoch results for all three runs (CSV)](results/resnet18_cifar100_runs.csv) 2.0658 | Train Acc: 43.84% | Test Acc:  40.53%
 Test images counted: 10000
-Runtime approx 8 minutes on RTX 4060 gompared to 55 minutes on i9 CPU
+Runtime approx 8 minutes on Cuda RTX 4060 gompared to 55 minutes on i9 CPU
 
 
