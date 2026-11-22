@@ -64,4 +64,26 @@ PGD-20 robust test accuracy was measured at the end of training and reached
 percentage points in clean accuracy and lost 2.47 points in robust accuracy
 relative to full PGD-10.
 
+### Spiking-PGD training by epoch
 
+ResNet-18 was trained with 10 PGD steps per batch, ε = 8/255, and a
+spiking threshold of ρ = 0.02. The run completed seven full epochs and
+268 of 391 batches in epoch 8.
+
+| Epoch | Adversarial train loss | Adversarial train accuracy | Clean test accuracy | Cumulative training time | Layer recompute fraction |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 4.3382 | 5.07% | 9.23% | 3.74 min | 37.93% |
+| 2 | 4.0796 | 8.01% | 14.19% | 8.10 min | 35.90% |
+| 3 | 3.9443 | 9.99% | 18.51% | 12.57 min | 37.10% |
+| 4 | 3.8324 | 11.54% | 21.46% | 17.03 min | 36.69% |
+| 5 | 3.7417 | 13.10% | 24.56% | 21.47 min | 38.11% |
+| 6 | 3.6499 | 14.62% | 26.55% | 25.94 min | 39.53% |
+| 7 | 3.5643 | 16.09% | 29.27% | 30.33 min | 40.38% |
+| 8 (partial) | 3.5033 | 16.95% | **31.17%** | **32.94 min** | 40.63% |
+
+Final PGD-20 robust test accuracy was **16.51%**. The recompute fraction
+tracks how often the instrumented layers recomputed their outputs during
+PGD. Despite reusing outputs, this Spiking-PGD run processed **3,005
+batches**, compared with **3,910** for full PGD-10 under the same
+training-time budget. At ρ = 0.02, layer reuse did not translate into
+higher training throughput on this setup.
