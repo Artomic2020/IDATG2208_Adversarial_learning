@@ -6,18 +6,21 @@ import torchvision
 import torchvision.transforms as transforms
 import matplotlib.pyplot as plt  # for plotting graphs
 import numpy as np   #for numerical operations 
+import csv
+from time import perf_counter
  
+
+mean = (0.5071, 0.4867, 0.4408) # mean and a standard deviation for each color channel, in red, green, blue
+std = (0.2675, 0.2565, 0.2761)# Normalize each RGB channel: (pixel - channel_mean) / channel_std  Also can be written: transforms.Normalize(mean, std)
+
  
 transform_train = transforms.Compose([
     transforms.RandomHorizontalFlip(), 
     transforms.RandomCrop(32, padding=4),  #(**For later FGSM/PGD evaluation, train=False and omit the random flip and crop)
     transforms.ToTensor(),     # converts CIFAR-10’s pixel values from integers in [0, 255] to floats in [0, 1]
-    transforms.Normalize((0.4914, 0.4822, 0.4465),  # mean and a standard deviation for each color channel, in red, green, blue
-                         (0.2023, 0.1994, 0.2010))  # Normalize each RGB channel: (pixel - channel_mean) / channel_std  Also can be written: transforms.Normalize(mean, std)
-])
+    transforms.Normalize(mean, std)  ])
 
-mean = (0.5071, 0.4867, 0.4408) # mean and a standard deviation for each color channel, in red, green, blue
-std = (0.2675, 0.2565, 0.2761)
+
 
 transform_test = transforms.Compose([
     transforms.ToTensor(),
@@ -119,42 +122,84 @@ scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=30, gamma=0.1) #StepL
 
 #Train the model
 
-num_epochs = 10
+num_epochs = 10 # Full passes through the training data
+pgd_train_steps = 10  # Steps to generate adversarial images for each batch
+pgd_eval_steps = 20  # PGD steps per test batch at the paper's reference budget (Hou et al., 2026, p. 7).
+
 train_losses, train_acc_list, test_acc_list = [], [], []
+
+mean_tensor = torch.tensor(mean, device=device).view(1, 3, 1, 1)#(batch, channel, height, width)
+std_tensor = torch.tensor(std, device=device).view(1, 3, 1, 1)#"broadcasting" reshapes rgb values for the whole batch
+
+epsilon = (8 / 255) / std_tensor
+alpha = (2 / 255) / std_tensor #allowed range
+
+pixel_min = (0 - mean_tensor) / std_tensor
+pixel_max = (1 - mean_tensor) / std_tensor
+
+from time import perf_counter
+
+training_seconds = 0.0
 
 for epoch in range (num_epochs):
     model.train()
+    training_seconds = 0.0
     running_loss = 0.0
     correct, total = 0,0
+    epoch_start = perf_counter()
     for inputs, labels in trainloader:
         inputs, labels = inputs.to(device), labels.to(device)
+        # Bounds enforce both the perturbation budget and valid pixel values.
+        lower = torch.maximum(inputs - epsilon, pixel_min) 
+        upper = torch.minimum(inputs + epsilon, pixel_max)
+
+        # Random start within the allowed perturbation range.
+        noise = (2 * torch.rand_like(inputs) - 1) * epsilon  #add random noise to the inputs
+        adv_inputs = torch.minimum(torch.maximum(inputs + noise, lower), upper)
+
+        # Generate adversarial images with the current model.
+        model.eval()  # Keep BatchNorm running statistics fixed during PGD.
+        for _ in range(pgd_train_steps):# take 10 steps 
+            adv_inputs = adv_inputs.detach().requires_grad_(True)
+
+            attack_loss = criterion(model(adv_inputs), labels)
+            input_grad, = torch.autograd.grad(attack_loss, adv_inputs) # (calculates how changing the pixels would change the loss)
+
+            with torch.no_grad():
+                adv_inputs = adv_inputs + alpha * input_grad.sign() #moves the pixels in the direction that increases the loss (like perlin noise)
+                adv_inputs = torch.minimum(torch.maximum(adv_inputs, lower), upper) # within the range
+
+
+        max_change = ((adv_inputs - inputs) * std_tensor).abs().max().item()
+        print(f"Maximum pixel change: {max_change:.6f} (limit: {8 / 255:.6f})")
+        # Update the model once, using the finished adversarial batch.
+        model.train()
         optimizer.zero_grad()
-   
-        # Start (PGD) here with a copy of the clean batch
-        
-        adv_inputs = inputs.detach().clone()   #detach() starts the attack from a tensor with no gradient history. clone()
-            
-            #clone() gives adv_inputs its own storage so we can perturb it and still use inputs as a reference
-        
-        
-        
-        outputs = model(inputs)
+        outputs = model(adv_inputs.detach()) #runs fwd pass
         loss = criterion(outputs, labels)
         loss.backward()
-        optimizer.step()\  
+        optimizer.step()#take one step on the model weights
+        #raise SystemExit  # Stop after the first batch during this check
         running_loss += loss.item() * inputs.size(0)
         _, predicted = outputs.max(1)
         total += labels.size(0)
         correct += predicted.eq(labels).sum().item()
-    
+        
+        
+        
+
+    if next(model.parameters()).is_cuda:
+        torch.cuda.synchronize()
+
+    training_seconds += perf_counter() - epoch_start
+    print(f"Training time so far: {training_seconds / 60:.1f} minutes")
     train_loss = running_loss / len(trainloader.dataset)
     train_acc = 100. * correct/total
     train_losses.append(train_loss)
+    torch.save(model.state_dict(), "resnet18_cifar100_pgd10_weights.pth")
     train_acc_list.append(train_acc)
     
-    
-   
-    
+
     model.eval()
     correct, total = 0, 0
     with torch.no_grad():
@@ -173,7 +218,20 @@ for epoch in range (num_epochs):
     print(f'Epoch [{epoch+1}/{num_epochs}]  Train Loss: {train_loss: .4f} | Train Acc: {train_acc:.2f}% | Test Acc: {test_acc: .2f}%')
     print("Test images counted:", total)
 
-  
+print("\nFinal summary | ResNet-18 on CIFAR-100 | Full PGD-10")
+print(f"Clean test accuracy: {test_acc_list[-1]:.2f}%")
+print("PGD-20 robust test accuracy: pending evaluation")
+print(f"Total training time: {training_seconds / 60:.1f} minutes")
 
+summary = (
+    "# ResNet-18 on CIFAR-100 — Full PGD-10\n\n"
+    "- Perturbation limit: 8/255\n"
+    f"- Clean test accuracy: {test_acc_list[-1]:.2f}%\n"
+    "- PGD-20 robust test accuracy: pending evaluation\n"
+    f"- Total training time: {training_seconds / 60:.1f} minutes\n"
+)
 
-        
+print(summary)
+
+with open("resnet18_cifar100_pgd10_summary.md", "w", encoding="utf-8") as file:
+    file.write(summary)
