@@ -23,3 +23,13 @@ Test images counted: 10000
 Runtime approx 8 minutes on Cuda RTX 4060 gompared to 55 minutes on i9 CPU
 
 
+Final summary | ResNet-18 on CIFAR-100 | Full PGD-10
+Clean test accuracy: 23.98%
+PGD-20 robust test accuracy: pending evaluation
+- Whole-run elapsed time: 31.2 minutes (10 epochs, including clean evaluation)
+# ResNet-18 on CIFAR-100 — Full PGD-10
+
+- Perturbation limit: 8/255
+- Clean test accuracy: 23.98%
+- PGD-20 robust test accuracy: pending evaluation
+- Total training time: 3.1 minutes
