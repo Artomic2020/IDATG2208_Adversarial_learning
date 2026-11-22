@@ -55,3 +55,30 @@ with early-stopped PGD and Spiking-PGD.
 
 Each epoch processed 391 training batches. PGD-20 robust test accuracy was
 measured after the final epoch and reached **18.85%** at ε = 8/255.
+
+### CIFAR-100 — Early-stopped PGD-3
+
+ResNet-18 was trained with 3 PGD steps per batch at ε = 8/255, using seed 42.
+The run processed 9,261 batches in 32.94 minutes of training. It completed
+23 full epochs and 268 of 391 batches in epoch 24. Whole-run time,
+including evaluation, was 35.12 minutes.
+
+| Epoch | Adversarial train loss | Adversarial train accuracy | Clean test accuracy | Cumulative training time |
+|---:|---:|---:|---:|---:|
+| 1 | 4.2590 | 5.67% | 11.20% | 1.35 min |
+| 5 | 3.3911 | 18.62% | 30.58% | 6.90 min |
+| 10 | 2.9506 | 26.24% | 41.31% | 13.88 min |
+| 15 | 2.7599 | 29.76% | 45.01% | 20.75 min |
+| 20 | 2.6484 | 31.83% | 46.46% | 27.74 min |
+| 24 (partial) | 2.5640 | 33.33% | **47.68%** | **32.94 min** |
+
+PGD-20 robust test accuracy was measured at the end of training and reached
+**16.38%** at ε = 8/255. At matched training time, PGD-3 gained 11.18
+percentage points in clean accuracy and lost 2.47 points in robust accuracy
+relative to full PGD-10.
+
+| Training method | Training batches | Clean test accuracy | PGD‑20 robust accuracy at ε = 8/255 | Training time |
+|---|---:|---:|---:|---:|
+| Full PGD‑10 | 3,910 | 36.50% | **18.85%** | 32.94 min |
+| Early-stopped PGD‑3 | 9,261 | **47.68%** | 16.38% | 32.94 min |
+| Spiking‑PGD | Pending | Pending | Pending | Pending |
