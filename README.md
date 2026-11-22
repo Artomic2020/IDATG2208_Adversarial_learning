@@ -22,18 +22,36 @@ Each epoch was evaluated on all 10,000 CIFAR-100 test images.
 Test images counted: 10000
 Runtime approx 8 minutes on Cuda RTX 4060 gompared to 55 minutes on i9 CPU
 
+## CIFAR-100 — Full PGD-10 baseline
 
-## CIFAR-100 — Full PGD-10 adversarial training
+ResNet-18 with residual shortcuts enabled, trained on CUDA for 10 epochs
+(3,910 batches) using seed 42. Training used 10 PGD steps per batch at
+ε = 8/255. Robustness was evaluated separately using PGD-20 at the same
+perturbation limit.
 
-Preliminary results for ResNet-18 after 10 training epochs. Adversarial training used 10 PGD steps per batch with a perturbation limit of ε = 8/255.
-
-| Metric | Final result |
+| Metric | Result |
 |---|---:|
-| Adversarial training loss | 3.6939 |
-| Adversarial training accuracy | 14.27% |
-| Clean test accuracy (10,000 images) | **23.98%** |
-| PGD-20 robust test accuracy | Pending evaluation |
-| Whole-run elapsed time | 31.21 min |
+| Clean test accuracy | **36.50%** |
+| PGD-20 robust test accuracy | **18.85%** |
+| Training time | **32.94 min** |
+| Whole-run elapsed time, including evaluation | **34.51 min** |
 
-The elapsed time includes training, clean evaluation, and checkpoint saves. The matched-compute comparison with early-stopped PGD and Spiking-PGD is pending.
+This run is the full PGD reference for the matched-training-time comparison
+with early-stopped PGD and Spiking-PGD.
+### Full PGD-10 training by epoch
 
+| Epoch | Adversarial train loss | Adversarial train accuracy | Clean test accuracy | Cumulative training time |
+|---:|---:|---:|---:|---:|
+| 1 | 4.3430 | 5.11% | 11.07% | 3.30 min |
+| 2 | 4.0569 | 8.45% | 15.42% | 6.67 min |
+| 3 | 3.9213 | 10.46% | 19.15% | 9.93 min |
+| 4 | 3.8080 | 12.14% | 21.97% | 13.16 min |
+| 5 | 3.7130 | 13.84% | 26.65% | 16.56 min |
+| 6 | 3.6185 | 15.25% | 28.12% | 19.94 min |
+| 7 | 3.5423 | 16.53% | 29.71% | 23.24 min |
+| 8 | 3.4804 | 17.62% | 31.86% | 26.49 min |
+| 9 | 3.4254 | 18.69% | 34.39% | 29.73 min |
+| 10 | 3.3884 | 19.04% | **36.50%** | **32.94 min** |
+
+Each epoch processed 391 training batches. PGD-20 robust test accuracy was
+measured after the final epoch and reached **18.85%** at ε = 8/255.
