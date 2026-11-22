@@ -1,5 +1,3 @@
-**Best clean baseline: 40.53% test accuracy** after 10 epochs on an NVIDIA GeForce RTX 4060 Laptop GPU (seed `42`).
-
 ### Checkpoint 1 · CIFAR-100 · Initial standard-training run
 
 The initial standard-training run reached **40.53% clean test accuracy**
