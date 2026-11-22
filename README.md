@@ -1,26 +1,16 @@
 **Best clean baseline: 40.53% test accuracy** after 10 epochs on an NVIDIA GeForce RTX 4060 Laptop GPU (seed `42`).
 
-## Checkpoint 1 · Dataset 1 (CIFAR-100) · Standard ResNet-18
+### Checkpoint 1 · CIFAR-100 · Initial standard-training run
 
+The initial standard-training run reached **40.53% clean test accuracy**
+after 10 epochs (seed 42, NVIDIA GeForce RTX 4060 Laptop GPU).
+Evaluation used all 10,000 CIFAR-100 test images.
 
-| Epoch | Train loss | Train accuracy | Test accuracy |
-| ---: | ---: | ---: | ---: |
-| 1 | 4.1699 | 5.01% | 6.35% |
-| 2 | 3.8348 | 9.36% | 10.39% |
-| 3 | 3.5492 | 14.39% | 14.97% |
-| 4 | 3.2550 | 19.77% | 22.33% |
-| 5 | 2.9587 | 25.19% | 19.38% |
-| 6 | 2.6932 | 30.26% | 23.45% |
-| 7 | 2.4737 | 35.01% | 30.01% |
-| 8 | 2.3086 | 38.33% | 37.39% |
-| 9 | 2.1816 | 41.27% | 37.28% |
-| 10 | 2.0658 | 43.84% | **40.53%** |
-
-Each epoch was evaluated on all 10,000 CIFAR-100 test images.
-
-[Per-epoch results for all three runs (CSV)](results/resnet18_cifar100_runs.csv) 2.0658 | Train Acc: 43.84% | Test Acc:  40.53%
-Test images counted: 10000
-Runtime approx 8 minutes on Cuda RTX 4060 gompared to 55 minutes on i9 CPU
+| Training method | Training batches | Clean test accuracy | PGD‑20 robust accuracy at ε = 8/255 | Training time |
+|---|---:|---:|---:|---:|
+| Full PGD‑10 | 3,910 | 36.50% | **18.85%** | 32.94 min |
+| Early-stopped PGD‑3 | 9,261 | **47.68%** | 16.38% | 32.94 min |
+| Spiking‑PGD | Pending | Pending | Pending | Pending |
 
 ## CIFAR-100 — Full PGD-10 baseline
 
@@ -77,8 +67,4 @@ PGD-20 robust test accuracy was measured at the end of training and reached
 percentage points in clean accuracy and lost 2.47 points in robust accuracy
 relative to full PGD-10.
 
-| Training method | Training batches | Clean test accuracy | PGD‑20 robust accuracy at ε = 8/255 | Training time |
-|---|---:|---:|---:|---:|
-| Full PGD‑10 | 3,910 | 36.50% | **18.85%** | 32.94 min |
-| Early-stopped PGD‑3 | 9,261 | **47.68%** | 16.38% | 32.94 min |
-| Spiking‑PGD | Pending | Pending | Pending | Pending |
+
