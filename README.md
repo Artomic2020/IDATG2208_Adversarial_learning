@@ -4,12 +4,11 @@ The initial standard-training run reached **40.53% clean test accuracy**
 after 10 epochs (seed 42, NVIDIA GeForce RTX 4060 Laptop GPU).
 Evaluation used all 10,000 CIFAR-100 test images.
 
-| Training method | Training batches | Clean test accuracy | PGD‑20 robust accuracy at ε = 8/255 | Training time |
-|---|---:|---:|---:|---:|
-| Full PGD‑10 | 3,910 | 36.50% | **18.85%** | 32.94 min |
-| Early-stopped PGD‑3 | 9,261 | **47.68%** | 16.38% | 32.94 min |
-| Spiking‑PGD | Pending | Pending | Pending | Pending |
-
+| Training method | Batches trained | Clean accuracy | Robust accuracy |
+|---|---:|---:|---:|
+| Full PGD‑10 | 3,910 | 36.50% | **18.85%** |
+| Early-stopped PGD‑3 | 9,261 | **47.68%** | 16.38% |
+| Spiking‑PGD (ρ = 0.02) | 3,005 | 31.17% | 16.51% |
 ## CIFAR-100 — Full PGD-10 baseline
 
 ResNet-18 with residual shortcuts enabled, trained on CUDA for 10 epochs
