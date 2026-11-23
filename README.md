@@ -87,3 +87,29 @@ PGD. Despite reusing outputs, this Spiking-PGD run processed **3,005
 batches**, compared with **3,910** for full PGD-10 under the same
 training-time budget. At ρ = 0.02, layer reuse did not translate into
 higher training throughput on this setup.
+
+## SVHN — Full PGD-10 reference run
+
+ResNet-18 was trained for 10 epochs (5,730 batches) with seed 42 and a
+learning rate of 0.01. The first 150 batches used clean inputs as a warm-up.
+Subsequent batches used 10 PGD steps at ε = 8/255.
+
+| Epoch | Train loss | Train accuracy | Clean test accuracy | Cumulative training time |
+|---:|---:|---:|---:|---:|
+| 1 | 2.1248 | 24.87% | 56.10% | 3.87 min |
+| 2 | 1.8990 | 33.84% | 75.82% | 8.95 min |
+| 3 | 1.7148 | 41.96% | 80.60% | 14.21 min |
+| 4 | 1.6208 | 45.66% | 82.35% | 19.29 min |
+| 5 | 1.5647 | 47.87% | 81.82% | 24.17 min |
+| 6 | 1.5224 | 49.55% | 84.68% | 29.24 min |
+| 7 | 1.4928 | 50.48% | 87.80% | 34.20 min |
+| 8 | 1.4677 | 51.48% | 86.16% | 39.25 min |
+| 9 | 1.4506 | 52.11% | 85.11% | 44.15 min |
+| 10 | 1.4276 | 52.91% | **87.99%** | **49.14 min** |
+
+Epoch 1 training metrics include both clean warm-up and adversarial batches.
+Final **PGD-20 robust test accuracy was 47.91%** at ε = 8/255.
+The whole run took **53.49 minutes**.
+
+The measured training time of **49.14 minutes**, including warm-up, sets
+the budget for the early-stopped PGD-3 and Spiking-PGD runs on SVHN.
