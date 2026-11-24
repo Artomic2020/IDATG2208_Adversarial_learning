@@ -1,3 +1,6 @@
+I adapted the training and evaluation pipeline for CIFAR‑100 and SVHN, established the matched-time protocol, ran the experiments on my RTX 4060 Laptop GPU, and organized the per-seed results. This project builds on the cited paper and its reference implementation.
+
+
 # PGD training results
 
 Mean accuracies use completed seeds. SD is sample standard deviation in
