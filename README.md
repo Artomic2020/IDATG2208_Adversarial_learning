@@ -1,3 +1,29 @@
+# PGD training results
+
+Mean accuracies use completed seeds. SD is sample standard deviation in
+percentage points and is shown when at least two seeds have finished.
+Robust accuracy uses PGD-20 at ε = 8/255.
+
+| Dataset | Method | PGD steps | ρ | Budget (min) | Seeds | Clean mean (%) | Clean SD (pp) | Robust mean (%) | Robust SD (pp) | Mean train time (min) |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| CIFAR-100 | Full PGD | 10 | — | 32.94 | 1 | 36.50 | — | 18.85 | — | 32.94 |
+| CIFAR-100 | Early-stopped PGD | 3 | — | 32.94 | 1 | 47.68 | — | 16.38 | — | 32.94 |
+| CIFAR-100 | Spiking-PGD | 10 | 0.020 | 32.94 | 1 | 31.17 | — | 16.51 | — | 32.94 |
+| SVHN | Full PGD | 10 | — | 49.14 | 1 | 87.99 | — | 47.91 | — | 49.14 |
+| SVHN | Early-stopped PGD | 3 | — | 49.14 | 1 | 93.31 | — | 39.34 | — | 49.14 |
+| SVHN | Spiking-PGD | 10 | 0.020 | 49.14 | 1 | 87.36 | — | 44.84 | — | 49.14 |
+
+## Completed runs by seed
+
+| Dataset | Method | PGD steps | ρ | Budget (min) | Seed | Clean (%) | PGD-20 robust (%) | Train time (min) | Batches |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| CIFAR-100 | Full PGD | 10 | — | 32.94 | 42 | 36.50 | 18.85 | 32.94 | 3,910 |
+| CIFAR-100 | Early-stopped PGD | 3 | — | 32.94 | 42 | 47.68 | 16.38 | 32.94 | 9,261 |
+| CIFAR-100 | Spiking-PGD | 10 | 0.020 | 32.94 | 42 | 31.17 | 16.51 | 32.94 | 3,005 |
+| SVHN | Full PGD | 10 | — | 49.14 | 42 | 87.99 | 47.91 | 49.14 | 5,730 |
+| SVHN | Early-stopped PGD | 3 | — | 49.14 | 42 | 93.31 | 39.34 | 49.14 | 10,937 |
+| SVHN | Spiking-PGD | 10 | 0.020 | 49.14 | 42 | 87.36 | 44.84 | 49.14 | 4,093 |
+
 ### Checkpoint 1 · CIFAR-100 · Initial standard-training run
 
 The initial standard-training run reached **40.53% clean test accuracy**
