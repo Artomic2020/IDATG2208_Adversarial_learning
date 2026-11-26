@@ -61,6 +61,14 @@ Robust accuracy uses PGD-20 at ε = 8/255.
 | SVHN | Spiking-PGD | 10 | 0.020 | 49.14 | 46 | 87.23 | 42.83 | 49.15 | 5,069 |
 
 
+| Dataset | Runs | Budget per run | Total training time |
+|---|---:|---:|---:|
+| CIFAR‑100 | 15 | 32.94 min | 8 h 14 min |
+| SVHN | 15 | 49.14 min | 12 h 17 min |
+
+
+
+
 ### Checkpoint 1 · CIFAR-100 · Initial standard-training run
 
 The initial standard-training run reached **40.53% clean test accuracy**
