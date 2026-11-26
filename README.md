@@ -1,4 +1,8 @@
-I adapted the training and evaluation pipeline for CIFAR‑100 and SVHN, established the matched-time protocol, ran the experiments on my RTX 4060 Laptop GPU, and organized the per-seed results. This project builds on the cited paper and its reference implementation.
+I adapted the training and evaluation pipeline for CIFAR‑100 and SVHN, established the matched-time protocol, ran the experiments on my RTX 4060 Laptop GPU, and organized the per-seed results. 
+This project builds on the cited paper and its reference implementation.
+
+Code and run-level results. The training code, per-seed results, and reproducibility notes are in a private repository that I can share by request.
+For course review or collaboration, please contact me with your GitHub username and the material you’d like to access.
 
 
 # PGD training results
