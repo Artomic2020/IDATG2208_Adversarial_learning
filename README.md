@@ -1,5 +1,7 @@
 I adapted the training and evaluation pipeline for CIFAR‑100 and SVHN, established the matched-time protocol, ran the experiments on my RTX 4060 Laptop GPU, and organized the per-seed results. 
-This project builds on the cited paper and its reference implementation.
+This project builds on the Spiking-PGD method introduced by Hou et al. (2026) and its reference implementation.
+
+Hou, Z., Gao, W., & Liu, X. (2026). Fine-grained iterative adversarial attacks with limited computation budget. In Proceedings of the Fourteenth International Conference on Learning Representations. https://proceedings.iclr.cc/paper_files/paper/2026/hash/79f899cafcfe1f606c00b9c88a04275a-Abstract-Conference.html
 
 Code and run-level results. The training code, per-seed results, and reproducibility notes are in a private repository that I can share by request.
 For course review or collaboration, please contact me with your GitHub username and the material you’d like to access.
