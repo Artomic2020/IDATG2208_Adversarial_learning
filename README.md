@@ -7,17 +7,11 @@ Mean accuracies use completed seeds. SD is sample standard deviation in
 percentage points and is shown when at least two seeds have finished.
 Robust accuracy uses PGD-20 at ε = 8/255.
 
-# PGD training results
-
-Mean accuracies use completed seeds. SD is sample standard deviation in
-percentage points and is shown when at least two seeds have finished.
-Robust accuracy uses PGD-20 at ε = 8/255.
-
 | Dataset | Method | PGD steps | ρ | Budget (min) | Seeds | Clean mean (%) | Clean SD (pp) | Robust mean (%) | Robust SD (pp) | Mean train time (min) |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| CIFAR-100 | Full PGD | 10 | — | 32.94 | 2 | 30.02 | 9.16 | 16.02 | 4.01 | 32.94 |
-| CIFAR-100 | Early-stopped PGD | 3 | — | 32.94 | 2 | 47.33 | 0.50 | 16.91 | 0.75 | 32.94 |
-| CIFAR-100 | Spiking-PGD | 10 | 0.020 | 32.94 | 2 | 31.20 | 0.05 | 16.00 | 0.72 | 32.94 |
+| CIFAR-100 | Full PGD | 10 | — | 32.94 | 5 | 32.35 | 5.08 | 16.65 | 2.12 | 32.95 |
+| CIFAR-100 | Early-stopped PGD | 3 | — | 32.94 | 5 | 46.38 | 2.13 | 16.52 | 0.61 | 38.27 |
+| CIFAR-100 | Spiking-PGD | 10 | 0.020 | 32.94 | 5 | 29.39 | 4.05 | 15.16 | 1.59 | 34.49 |
 | SVHN | Full PGD | 10 | — | 49.14 | 5 | 85.33 | 2.31 | 45.56 | 2.45 | 49.14 |
 | SVHN | Early-stopped PGD | 3 | — | 49.14 | 5 | 92.91 | 0.60 | 39.49 | 1.63 | 49.14 |
 | SVHN | Spiking-PGD | 10 | 0.020 | 49.14 | 5 | 86.51 | 0.79 | 44.92 | 1.41 | 49.15 |
@@ -28,10 +22,19 @@ Robust accuracy uses PGD-20 at ε = 8/255.
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|
 | CIFAR-100 | Full PGD | 10 | — | 32.94 | 42 | 36.50 | 18.85 | 32.94 | 3,910 |
 | CIFAR-100 | Full PGD | 10 | — | 32.94 | 43 | 23.55 | 13.18 | 32.95 | 1,990 |
+| CIFAR-100 | Full PGD | 10 | — | 32.94 | 44 | 33.60 | 16.52 | 32.95 | 3,651 |
+| CIFAR-100 | Full PGD | 10 | — | 32.94 | 45 | 34.84 | 17.56 | 32.95 | 3,696 |
+| CIFAR-100 | Full PGD | 10 | — | 32.94 | 46 | 33.26 | 17.12 | 32.95 | 3,656 |
 | CIFAR-100 | Early-stopped PGD | 3 | — | 32.94 | 42 | 47.68 | 16.38 | 32.94 | 9,261 |
 | CIFAR-100 | Early-stopped PGD | 3 | — | 32.94 | 43 | 46.97 | 17.44 | 32.94 | 6,904 |
+| CIFAR-100 | Early-stopped PGD | 3 | — | 32.94 | 44 | 47.87 | 16.63 | 32.94 | 8,600 |
+| CIFAR-100 | Early-stopped PGD | 3 | — | 32.94 | 45 | 46.72 | 15.75 | 32.94 | 7,384 |
+| CIFAR-100 | Early-stopped PGD | 3 | — | 32.94 | 46 | 42.68 | 16.42 | 59.58 | 4,488 |
 | CIFAR-100 | Spiking-PGD | 10 | 0.020 | 32.94 | 42 | 31.17 | 16.51 | 32.94 | 3,005 |
 | CIFAR-100 | Spiking-PGD | 10 | 0.020 | 32.94 | 43 | 31.24 | 15.49 | 32.95 | 3,484 |
+| CIFAR-100 | Spiking-PGD | 10 | 0.020 | 32.94 | 44 | 30.03 | 15.08 | 32.94 | 3,098 |
+| CIFAR-100 | Spiking-PGD | 10 | 0.020 | 32.94 | 45 | 32.21 | 16.21 | 32.94 | 3,211 |
+| CIFAR-100 | Spiking-PGD | 10 | 0.020 | 32.94 | 46 | 22.28 | 12.49 | 40.66 | 2,022 |
 | SVHN | Full PGD | 10 | — | 49.14 | 42 | 87.99 | 47.91 | 49.14 | 5,730 |
 | SVHN | Full PGD | 10 | — | 49.14 | 43 | 81.94 | 44.30 | 49.14 | 3,806 |
 | SVHN | Full PGD | 10 | — | 49.14 | 44 | 86.21 | 46.47 | 49.15 | 5,509 |
