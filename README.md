@@ -1,3 +1,6 @@
+For Checkpoint 2, I compared three methods for generating adversarial examples during training: full PGD, early-stopped PGD, and Spiking-PGD. 
+I trained ResNet‑18 on CIFAR‑100 and SVHN and compared clean and robust test accuracy. For each dataset, all three methods had the same training-time budget on a single GPU.
+
 I adapted the training and evaluation pipeline for CIFAR‑100 and SVHN, established the matched-time protocol, ran the experiments on my RTX 4060 Laptop GPU, and organized the per-seed results. 
 This project builds on the Spiking-PGD method introduced by Hou et al. (2026) and its reference implementation.
 
